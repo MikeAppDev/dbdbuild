@@ -2,15 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\BuildRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Model\TimestampedInterface;
+use App\Repository\BuildRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=BuildRepository::class)
  */
-class Build
+class Build implements TimestampedInterface
 {
     /**
      * @ORM\Id
@@ -50,7 +51,7 @@ class Build
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="articles")
+     * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="builds")
      */
     private $categories;
 

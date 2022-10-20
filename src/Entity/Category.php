@@ -35,13 +35,13 @@ class Category
     private $color;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Build::class, inversedBy="categories")
+     * @ORM\ManyToMany(targetEntity=Build::class, mappedBy="categories")
      */
-    private $articles;
+    private $builds;
 
     public function __construct()
     {
-        $this->articles = new ArrayCollection();
+        $this->builds = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -88,24 +88,30 @@ class Category
     /**
      * @return Collection<int, Build>
      */
-    public function getArticles(): Collection
+    public function getBuilds(): Collection
     {
-        return $this->articles;
+        return $this->builds;
     }
 
-    public function addArticle(Build $article): self
+    public function addBuilds(Build $build): self
     {
-        if (!$this->articles->contains($article)) {
-            $this->articles[] = $article;
+        if (!$this->builds->contains($build)) {
+            $this->builds[] = $build;
         }
 
         return $this;
     }
 
-    public function removeArticle(Build $article): self
+    public function removeBuild(Build $build): self
     {
-        $this->articles->removeElement($article);
+        $this->builds->removeElement($build);
 
         return $this;
+    }
+
+    //Ajouté poue easyAdmin
+    public function __toString()
+    {
+        return $this->name;
     }
 }
