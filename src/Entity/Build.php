@@ -249,4 +249,10 @@ class Build implements TimestampedInterface
 
         return $this;
     }
+
+    //Ajouté poue easyAdmin
+    public function __toString()
+    {
+        return $this->title;
+    }
 }

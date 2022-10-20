@@ -9,8 +9,17 @@
 
     <p style="color: red">Killer : {{ build.killers[0].name }}</p>
     
-
     <p>{{ build.content|raw }}</p>
+
+    <h3 class="comment-title mt-5">
+        <span id='comment-count'>
+            {{ build.comments|length }} avis actuellement
+        </span>
+    </h3>
+    <hr>
+    <div class="comment-area mb-5">
+        {{ form(commentForm) }}
+    </div>
 
     
 </div>
