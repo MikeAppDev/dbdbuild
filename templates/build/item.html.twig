@@ -1,5 +1,6 @@
 {% set build_show = path('build_show', {'slug': build.slug }) %}
 
+
 <article class="mb-5">
     <div class="row">
         <div class="col-md-{{ leftCol ?? 5 }}">
@@ -13,10 +14,10 @@
             <h3 class="">
                 <a class="text-decoration-none" href="{{ build_show }}" class="text-decortion-none">{{ build.title }}</a>
             </h3>
+            {{ build.featuredText ?: build.content|striptags|slice(0,130) ~ '...' }}
             <p>
                 {{ build.createdAt|date('d M Y') }}
             </p>
-            {{ build.featuredText ?: build.content|striptags|slice(0,130) ~ '...' }}
         </div>
     </div>
 

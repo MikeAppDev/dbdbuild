@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{killer.name}}{% endblock %}
+
+{% block body %}
+
+<main class="container">
+        <div class="row g-5">
+            <div class="col">
+                <h3 class="pb-4 border-bottom">{{ killer.name }}</h3>
+                <div id="build-list">
+                    {% include 'build/list.html.twig' with {builds : killer.builds, leftCol: 4, rightCol: 8 } %}
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

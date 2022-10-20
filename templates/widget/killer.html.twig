@@ -1,0 +1,10 @@
+<div class="p-4 mb-3 rounded">
+    <h4>Killer</h4>
+    <ol class="list-unstyled mb-0">
+        {% for killer in killers %}
+        <li>
+            <a class="text-decoration-none" href="{{ path('killer_show', { slug: killer.slug }) }}" >{{ killer.name }}</a>
+        </li>
+        {% endfor %}
+    </ol>
+</div>

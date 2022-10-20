@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Build;
+use App\Entity\Killer;
 use App\Entity\Category;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,7 +34,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::subMenu('Build', 'fas fa-newspaper')->setSubItems([
             MenuItem::linkToCrud('Tous les Builds', 'fas fa-newspaper', Build::class),
             MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Build::class)->setAction(Crud::PAGE_NEW),
-            MenuItem::linkToCrud('Categorys', 'fas fa-list', Category::class)
+            MenuItem::linkToCrud('Categorys', 'fas fa-list', Category::class),
+            MenuItem::linkToCrud('Killers', 'fas fa-list', Killer::class),
         ]);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }

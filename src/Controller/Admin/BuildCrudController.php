@@ -27,6 +27,7 @@ class BuildCrudController extends AbstractCrudController
         yield TextField::new('featuredText');
 
         yield AssociationField::new('categories');
+        yield AssociationField::new('killers');
 
         yield DateTimeField::new('createdAt')
             ->hideOnForm();

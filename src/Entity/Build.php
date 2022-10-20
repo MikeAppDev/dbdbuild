@@ -65,10 +65,16 @@ class Build implements TimestampedInterface
      */
     private $featuredImage;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Killer::class, inversedBy="builds")
+     */
+    private $killers;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->killers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -213,6 +219,33 @@ class Build implements TimestampedInterface
     public function setFeaturedImage(?Media $featuredImage): self
     {
         $this->featuredImage = $featuredImage;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Killer>
+     */
+    public function getKillers(): Collection
+    {
+        return $this->killers;
+    }
+
+    public function addKiller(Killer $killer): self
+    {
+        if (!$this->killers->contains($killer)) {
+            $this->killers[] = $killer;
+            $killer->addBuild($this);
+        }
+
+        return $this;
+    }
+
+    public function removeKiller(Killer $killer): self
+    {
+        if ($this->killers->removeElement($killer)) {
+            $killer->removeBuild($this);
+        }
 
         return $this;
     }
