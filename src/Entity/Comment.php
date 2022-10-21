@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,13 +37,12 @@ class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
-    public function __construct(Build $build)
+    public function __construct()
     {
-        $this->build = $build;
+        $this->user = new ArrayCollection();
     }
 
     public function getId(): ?int

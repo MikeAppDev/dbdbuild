@@ -3,14 +3,28 @@
         <a class="d-flex align-items-center justify-content-center mb-md-0 me-md-auto text-dark text-decoration-none" href="{{ path('app_home') }}">
             <span class="fs-4 d-flex align-items-center">Main Build</span>
         </a>
+        
 
-        <ul class="nav nav-pills">
-            <li class="nav-item">
-                <a class="nav-link text-dark" href="#">Sign in</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link  text-dark" href="#">Connect</a>
-            </li>
-        </ul>
+            <ul class="nav nav-pills">
+
+            {% if app.user %}
+                Welcome : 
+                <span style="color: green">
+                {{ app.user.firstname }} - {{ app.user.name }}
+                </span>
+                {# {{ dump(app.user) }} #}
+                <a class='' href="{{ path('app_logout') }}">Logout</a>
+            {# {{dump(app.user)}} #}
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{{ path('app_login') }}">Sign in</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link  text-dark" href="{{ path('app_register' )}}">Create Account</a>
+                </li>
+            {% endif %}
+                
+            </ul>
+        
     </header>
 </div>

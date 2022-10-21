@@ -20,16 +20,17 @@ class CommentType extends AbstractType
          ->add('content', TextareaType::class, [
             'label' => 'Avis'
          ])
-         ->add('build', HiddenType::class)
          ->add('send', SubmitType::class, [
             'label' => 'Send'
          ])
          ;
+         /*
         $builder->get('build')
             ->addModelTransformer(new CallbackTransformer(
                 fn (Build $build) => $build->getId(),
                 fn (Build $build) => $build->getTitle()
             ));
+        */
     }
     public function configureOptions(OptionsResolver $resolver)
     {
