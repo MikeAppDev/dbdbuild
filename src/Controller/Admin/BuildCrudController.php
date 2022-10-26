@@ -5,7 +5,9 @@ namespace App\Controller\Admin;
 use App\Entity\Build;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -33,7 +35,9 @@ class BuildCrudController extends AbstractCrudController
             ->hideOnForm();
         yield DateTimeField::new('updatedAt')
             ->hideOnForm();
-        
+        yield ImageField::new('image')
+            ->setBasePath('image/build')
+            ->setUploadDir('public/image/build');
     }
     
 }

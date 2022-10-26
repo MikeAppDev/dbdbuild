@@ -11,8 +11,14 @@
     <p style="color: red">Killer : {{ build.killers[0].name }}</p>
     
     <p>{{ build.content|raw }}</p>
-    <img src="{{ asset('build.image') }}" alt="image">
-    {{ build.image }}
+    {# <img src="{{ asset('build.image') }}" alt="image"> #}
+
+    {# afficher images #}
+        <div class="col-md-5">
+            <img src="{{ asset('image/build/' ~ build.image) }}" alt="{{ build.title }}" class="col-12 ">
+        </div>
+
+    
     {# retour section #}
     <div>
         <a href="{{ path('allbuild') }}">Retour aux Builds</a>
