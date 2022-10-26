@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 class BuildController extends AbstractController
 {
     /**
-     * @Route("/builde/{slug}", name="build_show")
+     * @Route("/builde/{id}", name="build_show")
      */
     public function show(?Build $build, Request $request, EntityManagerInterface $manager): Response
     {
@@ -64,10 +64,25 @@ class BuildController extends AbstractController
 
     /**
      * @Route("/allbuild", name="allbuild")
+     * @Route("/builde/{id}/remove", name="removebuild")
      */
-    public function showAll(BuildRepository $buildRepository, Request $request) :Response
+    public function showAll(EntityManagerInterface $manager, BuildRepository $buildRepository, Build $buildRemove = null, Request $request) :Response
     {
         $builds = $buildRepository->findAll();
+        
+        if($buildRemove)
+        {
+            //je stock l'Id de la perk
+            $id = $buildRemove->getId();
+            //j'execute la methode remove de l'interface EntityManagerInterface.(formulation de la requete de suppr)
+            $manager->remove($buildRemove);
+            // flush() execute la requete DELETE en BDD
+            $manager->flush();
+            // Affiche le message
+            $this->addFlash('success', "La Killer a bien été supprimé !");
+            //redirection vers la page
+            return $this->redirectToRoute('allbuild');
+        }
 
 
         return $this->render('build/allbuild.html.twig', [

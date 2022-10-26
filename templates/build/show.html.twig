@@ -13,6 +13,17 @@
     <p>{{ build.content|raw }}</p>
     <img src="{{ asset('build.image') }}" alt="image">
     {{ build.image }}
+    {# retour section #}
+    <div>
+        <a href="{{ path('allbuild') }}">Retour aux Builds</a>
+    </div>
+    {# Remove section #}
+    <div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('removebuild', {'id': build.id}) }}">suppr</a>
+        {% endif %}
+    </div>
+
     <h3 class="comment-title mt-5">
         <span id='comment-count'>
             {{ build.comments|length }} avis actuellement

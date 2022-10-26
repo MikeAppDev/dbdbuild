@@ -15,8 +15,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PerksController extends AbstractController
 {
 
-        /**
-     * @Route("/perk/{slug}", name="perk_show")
+    /**
+     * @Route("/perk/{id}", name="perk_show")
      */
     public function index(?Perk $perk, PerkRepository $perkRepository): Response
     {
@@ -31,17 +31,33 @@ class PerksController extends AbstractController
 
     /**
      * @Route("/allperk", name="allperk")
+     * @Route("/perk/{id}/remove", name="removeperk")
      */
-    public function show(PerkRepository $perkRepository, Request $request): Response
+    public function show(EntityManagerInterface $manager, PerkRepository $perkRepository, Request $request, Perk $perkRemove = null): Response
     {
         $perks = $perkRepository->findAll();
+
+        if($perkRemove)
+        {   
+            //je stock l'Id de la perk
+            $id = $perkRemove->getId();
+
+            //j'execute la methode remove de l'interface EntityManagerInterface.(formulation de la requete de suppr)
+            $manager->remove($perkRemove);
+            // flush() execute la requete DELETE en BDD
+            $manager->flush();
+            // Affiche le message
+            $this->addFlash('success', "La Perk a bien été supprimé !");
+            //redirection vers la page
+            return $this->redirectToRoute('allperk');
+        }
 
         return $this->render('perks/allperk.html.twig', [
             'perks' => $perks,
         ]);
     }
 
-        /**
+    /**
      * @Route("/addperk", name="addperk")
      */
     public function add(Request $request, SluggerInterface $slugger, EntityManagerInterface $manager): Response
@@ -63,6 +79,14 @@ class PerksController extends AbstractController
             $perkForm = $this->createForm(PerkType::class, $perk);
 
             return $this->redirectToRoute('allperk');
+        }
+        if(!$perk){
+            $manager->remove($perk);
+            $manager->flush();
+
+            $this->addFlash('success', "La Perk a bien été supprimé !");
+
+            return $this->redirectToRoute('app_home');
         }
 
         return $this->render('perks/addperk.html.twig', [

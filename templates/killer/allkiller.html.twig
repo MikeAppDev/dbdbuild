@@ -4,6 +4,12 @@
  
 {% block body %}
 
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
 <div class="container-fluid">
     <div class="container">
         <h1> Tous les Killers </h1>
@@ -13,7 +19,7 @@
 
     <div class="container">
 
-        <a class="text-decoration-none" href="{{ path('killer_show', { slug: killer.slug }) }}" ><h1>{{ killer.name }}</h1></a>
+        <a class="text-decoration-none" href="{{ path('killer_show', { id: killer.id }) }}" ><h1>{{ killer.name }}</h1></a>
 
     </div>
 

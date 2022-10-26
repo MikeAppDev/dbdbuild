@@ -15,6 +15,14 @@
                 <div id="build-list" class="col">
                     <p>{{ perk.description|raw }}</p>
                 </div>
+                <div>
+                    <a href="{{ path('allperk') }}">Retour aux Perks</a>
+                </div>
+                <div>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('removeperk', {'id': perk.id}) }}">suppr</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </main>

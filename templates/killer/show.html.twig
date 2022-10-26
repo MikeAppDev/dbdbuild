@@ -16,6 +16,14 @@
                     {% include 'build/list.html.twig' with {builds : killer.builds, leftCol: 4, rightCol: 8 } %}
                 </div>
             </div>
+            <div>
+                <a href="{{ path('allkiller') }}">Retour aux Killers</a>
+            </div>
+            <div>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('removekiller', {'id': killer.id}) }}">suppr</a>
+                {% endif %}
+            </div>
         </div>
     </main>
 

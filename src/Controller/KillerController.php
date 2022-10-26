@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class KillerController extends AbstractController
 {
     /**
-     * @Route("/killer/{slug}", name="killer_show")
+     * @Route("/killer/{id}", name="killer_show")
      */
     public function index(?Killer $killer, KillerRepository $killerRepository): Response
     {
@@ -29,13 +29,27 @@ class KillerController extends AbstractController
         ]);
     }
 
-        /**
+    /**
      * @Route("/allkiller", name="allkiller")
+     * @Route("/killer/{id}/remove", name="removekiller")
      */
-    public function showAll(KillerRepository $killerRepository, Request $request) :Response
+    public function showAll(EntityManagerInterface $manager, KillerRepository $killerRepository, Killer $killerRemove = null, Request $request) :Response
     {
         $killers = $killerRepository->findAll();
 
+        if($killerRemove)
+        {
+            //je stock l'Id de la perk
+            $id = $killerRemove->getId();
+            //j'execute la methode remove de l'interface EntityManagerInterface.(formulation de la requete de suppr)
+            $manager->remove($killerRemove);
+            // flush() execute la requete DELETE en BDD
+            $manager->flush();
+            // Affiche le message
+            $this->addFlash('success', "La Killer a bien été supprimé !");
+            //redirection vers la page
+            return $this->redirectToRoute('allkiller');
+        }
 
         return $this->render('killer/allkiller.html.twig', [
             'killers' => $killers

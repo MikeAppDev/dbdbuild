@@ -18,7 +18,7 @@
     {% for build in builds %}
 
         {# je defini build_show pour moins de code a répéter #}
-        {% set build_show = path('build_show', {'slug': build.slug }) %}
+        {% set build_show = path('build_show', {'id': build.id }) %}
 
         <div class="container">
 

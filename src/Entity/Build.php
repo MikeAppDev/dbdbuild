@@ -31,7 +31,7 @@ class Build implements TimestampedInterface
     private $slug;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
      */
     private $content;
 
