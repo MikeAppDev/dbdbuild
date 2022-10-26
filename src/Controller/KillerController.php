@@ -58,10 +58,15 @@ class KillerController extends AbstractController
 
     /**
      * @Route("/addkiller", name="addkiller")
+     * @Route("/killer/{id}/edit", name="killer_edit")
      */
-    public function AddBuild(Request $request, SluggerInterface $slugger, EntityManagerInterface $manager) :Response
-    {
-        $killer = new Killer;
+    public function AddBuild(Killer $killer = null, Request $request, SluggerInterface $slugger, EntityManagerInterface $manager) :Response
+    {   
+        if(!$killer)
+        {
+            $killer = new Killer;
+        }
+
         $killerForm = $this->createForm(KillerType::class, $killer);
         $killerForm->handleRequest($request);
 
@@ -81,7 +86,8 @@ class KillerController extends AbstractController
         }
 
         return $this->render('killer/addKiller.html.twig', [
-            'form' => $killerForm->createView()
+            'form' => $killerForm->createView(),
+            'editMode' => $killer->getId(),
         ]);
     }
 }

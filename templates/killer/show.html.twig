@@ -21,7 +21,8 @@
             </div>
             <div>
                 {% if is_granted('ROLE_ADMIN') %}
-                    <a href="{{ path('removekiller', {'id': killer.id}) }}">suppr</a>
+                    <a href="{{ path('killer_edit', {'id': killer.id}) }}">Modifier</a>
+                    <a href="{{ path('removekiller', {'id': killer.id}) }}">Supprimer</a>
                 {% endif %}
             </div>
         </div>

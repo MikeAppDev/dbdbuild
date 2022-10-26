@@ -5,6 +5,13 @@
 {% block body %}
     <h1> ADD New Killer </h1>
 
+        {% if editMode %}
+            Modification de l'ID Killer =  <span class="text-info">{{ editMode }}</span>
+        {% else %}
+        {# Sinon editMode ne contient aucun ID d'article, il renvoi FALSE, alors c'est une insertion, on entre dans le ESLE #}
+            Création d'un nouveau Killer
+        {% endif %}
+
     {{ form_start(form) }}
 
         {{ form_row(form.name) }}
