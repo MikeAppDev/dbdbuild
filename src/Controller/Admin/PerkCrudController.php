@@ -32,7 +32,9 @@ class PerkCrudController extends AbstractCrudController
                 'Killer' => 'Killer',
                 'Survivor' => 'Survivor',
             ]);
-            // yield ImageField::new('image');
+            yield ImageField::new('image')
+            ->setBasePath('image/perk')
+            ->setUploadDir('public/image/perk');
         
     }
     

@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Perk;
 use App\Entity\Build;
 use App\Entity\Killer;
 use App\Entity\Category;
@@ -30,14 +31,24 @@ class BuildType extends AbstractType
                 'class' => Category::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'mapped' => true
+                'mapped' => true,
+                'expanded' => true,
+            ])
+            ->add('perk1', EntityType::class, [
+                'class' => Perk::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'mapped' => true,
+                'expanded' => true,
+                'required' => true
             ])
             // ->add('featuredImage')
             ->add('killers', EntityType::class, [
                 'class' => Killer::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'mapped' => true
+                'mapped' => true,
+                'expanded' => true,
             ])
             ->add('Send', SubmitType::class)
         ;

@@ -75,11 +75,17 @@ class Build implements TimestampedInterface
      */
     private $image;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Perk::class, inversedBy="builds")
+     */
+    private $perk1;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->killers = new ArrayCollection();
+        $this->perk1 = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -269,6 +275,30 @@ class Build implements TimestampedInterface
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Perk>
+     */
+    public function getPerk1(): Collection
+    {
+        return $this->perk1;
+    }
+
+    public function addPerk1(Perk $perk1): self
+    {
+        if (!$this->perk1->contains($perk1)) {
+            $this->perk1[] = $perk1;
+        }
+
+        return $this;
+    }
+
+    public function removePerk1(Perk $perk1): self
+    {
+        $this->perk1->removeElement($perk1);
 
         return $this;
     }

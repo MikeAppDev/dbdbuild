@@ -38,6 +38,7 @@ class BuildCrudController extends AbstractCrudController
         yield ImageField::new('image')
             ->setBasePath('image/build')
             ->setUploadDir('public/image/build');
+        yield AssociationField::new('perk1');
     }
     
 }

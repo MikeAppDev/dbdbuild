@@ -56,7 +56,7 @@ class BuildController extends AbstractController
         return $this->renderForm('build/show.html.twig', [
             'build' => $build,
             'commentForm' => $commentForm,
-            'comments' => $comments
+            'comments' => $comments,
         ]);
         
     }

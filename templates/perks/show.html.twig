@@ -11,10 +11,16 @@
                 <h3 class="pb-4 border-bottom ">{{ perk.name }}</h3>
                 <h3 class="pb-4 border-bottom">Categorie : <span style="color: red">{{ perk.category}}</span></h3>
             </div>
-                
-                <div id="build-list" class="col">
+                <div class="col-md-5">
+                    <img src="{{ asset('image/perk/' ~ perk.image) }}" alt="test" class="col-12 ">
+                    {{dump(perk.image)}}
+                </div>
+                <div id="build-list" class="col d-flex justify-content-center">
                     <p>{{ perk.description|raw }}</p>
                 </div>
+
+                
+
                 <div>
                     <a href="{{ path('allperk') }}">Retour aux Perks</a>
                 </div>

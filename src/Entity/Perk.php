@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PerkRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,16 @@ class Perk
      * @ORM\Column(type="string", length=255)
      */
     private $category;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Build::class, mappedBy="perk1")
+     */
+    private $builds;
+
+    public function __construct()
+    {
+        $this->builds = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -105,5 +117,38 @@ class Perk
         $this->category = $category;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Build>
+     */
+    public function getBuilds(): Collection
+    {
+        return $this->builds;
+    }
+
+    public function addBuild(Build $build): self
+    {
+        if (!$this->builds->contains($build)) {
+            $this->builds[] = $build;
+            $build->addPerk1($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBuild(Build $build): self
+    {
+        if ($this->builds->removeElement($build)) {
+            $build->removePerk1($this);
+        }
+
+        return $this;
+    }
+
+    //Ajouté poue easyAdmin
+    public function __toString()
+    {
+        return $this->name;
     }
 }

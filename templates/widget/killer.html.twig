@@ -3,7 +3,7 @@
     <ol class="list-unstyled mb-0">
         {% for killer in killers %}
         <li>
-            <a class="text-decoration-none" href="{{ path('killer_show', { slug: killer.slug }) }}" >{{ killer.name }}</a>
+            <a class="text-decoration-none" href="{{ path('killer_show', { id: killer.id }) }}" >{{ killer.name }}</a>
         </li>
         {% endfor %}
     </ol>
