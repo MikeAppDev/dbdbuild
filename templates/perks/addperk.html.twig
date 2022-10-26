@@ -5,6 +5,12 @@
 {% block body %}
 
 <h1> ADD New Perk </h1>
+        {% if editMode %}
+            Modification de la perk ID =  <span class="text-info">{{ editMode }}</span>
+        {% else %}
+        {# Sinon editMode ne contient aucun ID d'article, il renvoi FALSE, alors c'est une insertion, on entre dans le ESLE #}
+            Création d'une nouvelle Perk
+        {% endif %}
 
     {{ form_start(form) }}
 

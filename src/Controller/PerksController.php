@@ -59,10 +59,15 @@ class PerksController extends AbstractController
 
     /**
      * @Route("/addperk", name="addperk")
+     * @Route("/perk/{id}/edit", name="perk_edit")
      */
-    public function add(Request $request, SluggerInterface $slugger, EntityManagerInterface $manager): Response
+    public function add(Perk $perk = null, Request $request, SluggerInterface $slugger, EntityManagerInterface $manager): Response
     {
-        $perk = new Perk;
+        if(!$perk)
+        {
+            $perk = new Perk;
+        }
+        
         $perkForm = $this->createForm(PerkType::class, $perk);
         $perkForm->handleRequest($request);
 
@@ -90,7 +95,8 @@ class PerksController extends AbstractController
         }
 
         return $this->render('perks/addperk.html.twig', [
-            'form' => $perkForm->createView()
+            'form' => $perkForm->createView(),
+            'editMode' => $perk->getId(),
         ]);
     }
 }

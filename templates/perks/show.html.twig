@@ -20,6 +20,7 @@
                 </div>
                 <div>
                     {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('perk_edit', {'id': perk.id}) }}">Modification</a>
                         <a href="{{ path('removeperk', {'id': perk.id}) }}">suppr</a>
                     {% endif %}
                 </div>
