@@ -92,10 +92,16 @@ class BuildController extends AbstractController
 
     /**
      * @Route("/addbuild", name="addbuild")
+     * @Route("/builde/{id}/edit", name="build_edit")
      */
-    public function AddBuild(Request $request, SluggerInterface $slugger, EntityManagerInterface $manager) :Response
+    public function AddBuild(Build $build = null, Request $request, SluggerInterface $slugger, EntityManagerInterface $manager) :Response
     {
-        $build = new Build;
+        if(!$build)
+        {
+            $build = new Build;
+        }
+
+
         $buildForm = $this->createForm(BuildType::class, $build);
         $buildForm->handleRequest($request);
 
@@ -137,7 +143,8 @@ class BuildController extends AbstractController
         }
 
         return $this->render('build/addBuild.html.twig', [
-            'form' => $buildForm->createView()
+            'form' => $buildForm->createView(),
+            'editMode' => $build->getId(),
         ]);
     }
 }

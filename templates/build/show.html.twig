@@ -20,7 +20,8 @@
     {# Remove section #}
     <div>
         {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('removebuild', {'id': build.id}) }}">suppr</a>
+            <a href="{{ path('build_edit', {'id': build.id}) }}">Modifier</a>
+            <a href="{{ path('removebuild', {'id': build.id}) }}">Supprimer</a>
         {% endif %}
     </div>
 

@@ -4,10 +4,17 @@
 
 {% block body %}
 
+        {% if editMode %}
+            <h1>Modification du Build ID =  <span class="text-info">{{ editMode }}</span></h1>
+        {% else %}
+        {# Sinon editMode ne contient aucun ID d'article, il renvoi FALSE, alors c'est une insertion, on entre dans le ESLE #}
+            <h1> ADD New Build </h1>
+        {% endif %}
+
     {{ form_start(form) }}
 
         {{ form_row(form.title) }}
-        {# {{ form_row(form.slug) }} #}
+        {{ form_row(form.slug) }}
         {{ form_row(form.categories) }}
         {{ form_row(form.content) }}
         {{ form_row(form.image) }}
