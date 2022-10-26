@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Perk;
 use App\Entity\Build;
 use App\Entity\Killer;
 use App\Entity\Comment;
@@ -49,6 +50,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::subMenu('Killers', 'fas fa-newspaper', Killer::class)->setSubItems([
             MenuItem::linkToCrud('Tous les Killers', 'fas fa-list', Killer::class),
             MenuItem::linkToCrud('Add', 'fas fa-plus', Killer::class)->setAction(Crud::PAGE_NEW),
+        ]);
+
+        yield MenuItem::subMenu('Perks', 'fas fa-newspaper', Perk::class)->setSubItems([
+            MenuItem::linkToCrud('Toutes les Perks', 'fas fa-list', Perk::class),
+            MenuItem::linkToCrud('Add', 'fas fa-plus', Perk::class)->setAction(Crud::PAGE_NEW),
         ]);
 
         yield MenuItem::linkToCrud('Commentaires', 'fas fa-comment', Comment::class);

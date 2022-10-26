@@ -21,8 +21,9 @@
                 View
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonAdminAdd">
-                <li><a class="dropdown-item" href="#">Build</a></li>
-                <li><a class="dropdown-item" href="#">Killer</a></li>
+                <li><a class="dropdown-item" href="{{ path('allbuild')}}">Builds</a></li>
+                <li><a class="dropdown-item" href="{{ path('allkiller')}}">Killers</a></li>
+                <li><a class="dropdown-item" href="{{ path('allperk')}}">Perks</a></li>
             </ul>
         </div>
         {% if app.user %}
@@ -31,9 +32,11 @@
                 Ajouter
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonAdminAdd">
-                <li><a class="dropdown-item" href="#">Create Build</a></li>
-                <li><a class="dropdown-item" href="#">Create Killer</a></li>
-                <li><a class="dropdown-item" href="#">Create Page</a></li>
+                <li><a class="dropdown-item" href="{{ path('addbuild')}}">Create Build</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                <li><a class="dropdown-item" href="{{ path('addkiller')}}">Create Killer</a></li>
+                <li><a class="dropdown-item" href="{{ path('addperk')}}">Create Perks</a></li>
+                {% endif %}
             </ul>
         </div>
         {% endif %}

@@ -2,43 +2,34 @@
 
 namespace App\Form;
 
-use App\Entity\Build;
 use App\Entity\Killer;
 use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use EasyCorp\Bundle\EasyAdminBundle\Form\Type\SlugType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
-class BuildType extends AbstractType
+class KillerType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
+            ->add('name')
             ->add('slug')
-            ->add('content')
-            ->add('featuredText')
-            // ->add('createdAt')
-            // ->add('updatedAt')
-            ->add('image', FileType::class, array('data_class' => null))
             ->add('categories', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
                 'multiple' => true,
                 'mapped' => true
             ])
-            // ->add('featuredImage')
-            ->add('killers', EntityType::class, [
-                'class' => Killer::class,
-                'choice_label' => 'name',
-                'multiple' => true,
-                'mapped' => true
-            ])
+            // ->add('killers', EntityType::class, [
+            //     'class' => Killer::class,
+            //     'choice_label' => 'name',
+            //     'mapped' => false
+            // ])
+            // ->add('builds')
             ->add('Send', SubmitType::class)
         ;
     }
@@ -46,7 +37,7 @@ class BuildType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Build::class,
+            'data_class' => Killer::class,
         ]);
     }
 }

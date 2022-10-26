@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add Killer{% endblock %}
+
+{% block body %}
+    <h1> ADD New Killer </h1>
+
+    {{ form_start(form) }}
+
+        {{ form_row(form.name) }}
+        {# {{ form_row(form.killer) }} #}
+
+    {{ form_end(form) }}
+
+
+{% endblock %}

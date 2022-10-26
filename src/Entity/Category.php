@@ -39,9 +39,15 @@ class Category
      */
     private $builds;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Killer::class, mappedBy="categories")
+     */
+    private $killers;
+
     public function __construct()
     {
         $this->builds = new ArrayCollection();
+        $this->killers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -114,4 +120,33 @@ class Category
     {
         return $this->name;
     }
+
+    /**
+     * @return Collection<int, Killer>
+     */
+    public function getKillers(): Collection
+    {
+        return $this->killers;
+    }
+
+    public function addKiller(Killer $killer): self
+    {
+        if (!$this->killers->contains($killer)) {
+            $this->killers[] = $killer;
+            $killer->addCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeKiller(Killer $killer): self
+    {
+        if ($this->killers->removeElement($killer)) {
+            $killer->removeCategory($this);
+        }
+
+        return $this;
+    }
+
+    
 }

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{perk.name}}{% endblock %}
+
+{% block body %}
+
+<main class="container">
+        <div class="row g-5">
+            <div class="col">
+            <div class="d-flex justify-content-around align-items-center ">
+                <h3 class="pb-4 border-bottom ">{{ perk.name }}</h3>
+                <h3 class="pb-4 border-bottom">Categorie : <span style="color: red">{{ perk.category}}</span></h3>
+            </div>
+                
+                <div id="build-list" class="col">
+                    <p>{{ perk.description|raw }}</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

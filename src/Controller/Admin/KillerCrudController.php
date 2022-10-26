@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Killer;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class KillerCrudController extends AbstractCrudController
@@ -21,6 +22,7 @@ class KillerCrudController extends AbstractCrudController
         
         yield SlugField::new('slug')
             ->setTargetFieldName('name');
+        yield AssociationField::new('categories');
     }
     
 }

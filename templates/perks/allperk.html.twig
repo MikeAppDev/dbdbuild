@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <div class="container-fluid">
+            <div class="container">
+                <h1> Toutes les Perks </h1>
+            </div>
+
+        {% for perk in perks %}
+
+            <div class="container">
+
+                <a class="text-decoration-none" href="{{ path('perk_show', { slug: perk.slug }) }}" >
+                <h1>{{ perk.name }}</h1>
+                </a>
+
+            </div>
+        </div>
+
+        {% endfor %}
+
+{% endblock %}

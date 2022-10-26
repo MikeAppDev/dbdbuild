@@ -1,5 +1,31 @@
-{% for build in builds %}
+{% extends 'base.html.twig' %}
 
-    <p>{{ build.title }}</p>
+{% block title %}{% endblock %}
+ 
+{% block body %}
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+    <div class="container-fluid">
+        <div class="container">
+            <h1> Tous les Builds </h1>
+        </div>
+
+    {% for build in builds %}
+
+        {# je defini build_show pour moins de code a répéter #}
+        {% set build_show = path('build_show', {'slug': build.slug }) %}
+
+        <div class="container">
+
+            <a class="text-decoration-none" href="{{ build_show }}"><h1>{{ build.title }}</h1></a>
+
+        </div>
 
 {% endfor %}
+
+{% endblock %}
