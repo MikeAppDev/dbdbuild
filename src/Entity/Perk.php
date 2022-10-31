@@ -21,6 +21,7 @@ class Perk
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @ORM\OrderBy({"order" = "ASC"})
      */
     private $name;
 

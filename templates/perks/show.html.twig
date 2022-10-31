@@ -11,24 +11,24 @@
                 <h3 class="pb-4 border-bottom ">{{ perk.name }}</h3>
                 <h3 class="pb-4 border-bottom">Categorie : <span style="color: red">{{ perk.category}}</span></h3>
             </div>
-                <div class="col-md-5">
-                    <img src="{{ asset('image/perk/' ~ perk.image) }}" alt="test" class="col-12 ">
-                    {{dump(perk.image)}}
+                <div class="col-md-12 ">
+                    <div class="d-flex justify-content-center"><img src="{{ asset('image/perk/' ~ perk.image) }}" alt="test" class="mt-5 mb-5"  style="width:250px"></div>
                 </div>
-                <div id="build-list" class="col d-flex justify-content-center">
+                <div id="build-list" class="col d-flex justify-content-center mb-5">
                     <p>{{ perk.description|raw }}</p>
                 </div>
 
                 
-
-                <div>
-                    <a href="{{ path('allperk') }}">Retour aux Perks</a>
-                </div>
-                <div>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('perk_edit', {'id': perk.id}) }}">Modifier</a>
-                        <a href="{{ path('removeperk', {'id': perk.id}) }}">Supprimer</a>
-                    {% endif %}
+                <div class="container d-flex justify-content-center">
+                    <div class="m-2">
+                        <a href="{{ path('allperk') }}"><button type="button" class="btn btn-secondary">Retour aux Perks</button></a>
+                    </div>
+                    <div>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('perk_edit', {'id': perk.id}) }}"><button type="button" class="btn btn-warning m-2">Modifier</button></a>
+                            <a href="{{ path('removeperk', {'id': perk.id}) }}"><button type="button" class="btn btn-danger">Supprimer</button></a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

@@ -9,6 +9,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use EasyCorp\Bundle\EasyAdminBundle\Form\Type\SlugType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class KillerType extends AbstractType
@@ -16,14 +18,22 @@ class KillerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
+            ->add('name', TextType::class, [
+                'required' => false,
+                'label' => "Nom du Tueur",
+                'attr' => [ 
+                    'placeholder' => "Nom de votre Killer"
+                    ]
+                ])
             ->add('slug')
             ->add('categories', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
                 'multiple' => true,
-                'mapped' => true
+                'mapped' => true,
+                'label' => "Choisissez votre Categorie",
             ])
+
             // ->add('killers', EntityType::class, [
             //     'class' => Killer::class,
             //     'choice_label' => 'name',

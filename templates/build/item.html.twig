@@ -4,13 +4,10 @@
 <article class="mb-5">
     <div class="row d-flex align-items-center">
         <div class="col-md-{{ leftCol ?? 5 }}">
-            {# {% if build.featuredImage %} #}
                 <a href="{{ build_show }}">
-                    {# <img src="/uploads/{{ build.featuredImage.filename }}" alt="{{ build.featuredImage.altText }}" loading="lazy" width="350" height="200"> #}
                     <img src="{{ asset('image/build/' ~ build.image) }}" alt="{{ build.title }}" class="col-10" loading="lazy" width="300" height="200">
 
                 </a>
-            {# {% endif %} #}
         </div>
         <div class="col-md-{{ rightCol ?? 7 }}">
             <h3 class="">

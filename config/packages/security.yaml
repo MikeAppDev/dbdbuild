@@ -34,12 +34,17 @@ security:
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
+            access_denied_handler: App\Security\AccessDeniedHandler
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/addbuild, roles: ROLE_USER }
+        - { path: ^/build, roles: ROLE_USER }
+        - { path: ^/addkiller, roles: ROLE_ADMIN }
+        - { path: ^/addperk, roles: ROLE_ADMIN }
 
 when@test:
     security:

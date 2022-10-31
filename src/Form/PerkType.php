@@ -6,6 +6,7 @@ use App\Entity\Perk;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -17,7 +18,7 @@ class PerkType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            // ->add('image')
+            ->add('image', FileType::class, array('data_class' => null))
             ->add('slug')
             ->add('category', ChoiceType::class, [
                     'choices' => [

@@ -73,11 +73,33 @@ class PerksController extends AbstractController
 
         if($perkForm->isSubmitted() && $perkForm->isValid())
         {
+            $imageFile = $perkForm->get('image')->getData();
 
-            $manager->persist($perk);
-            $manager->flush();
+            if ($imageFile) {
+                $originalFileName = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFileName);
+                $newFilename =  $safeFilename.'-'.uniqid().".".$imageFile->guessExtension();
 
-            $this->addFlash('success',"La Perk est enregistré");
+                try {
+                    $imageFile->move(
+                        $this->getParameter('upload_directory_perk'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    $this->addFlash('message','une erreur est survenu lors de l\'upload de l\'image!');
+                    // return $this->redirectToRoute('allbuild');
+                }
+                $perkData = $perkForm->getData();
+
+                // $perkData->setCreatedAt(new DateTime('NOW'));
+
+                $perk->setImage($newFilename);
+
+                $manager->persist($perk);
+                $manager->flush();
+                $this->addFlash('success',"Perks bien enregistré");
+                
+            }
 
             unset($perkForm);
             $perk = new Perk();

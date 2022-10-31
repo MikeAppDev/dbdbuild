@@ -8,9 +8,10 @@
     <h1>{{ build.title }}</h1>
     <p style="color: red">categorie : {{ build.categories[0].name }}</p>
 
-    <p style="color: red">Killer : {{ build.killers[0].name }}</p>
+    <p style="color: red">Killer's name : {{ build.killers[0].name }}</p>
     
-    <p>{{ build.content|raw }}</p>
+    <h4 class="mt-5">Details / Complément d'informations du Build :</h4>
+    <p class="mb-5"> {{ build.content|raw }}</p>
     {# <img src="{{ asset('build.image') }}" alt="image"> #}
         {# {{dump(build.getPerk1)}} #}
     {# afficher images #}
@@ -19,7 +20,7 @@
         </div>
         <div class="col-md-12 d-flex flex-column justify-content-center">
             <div class="d-flex justify-content-center mt-4 mb-4">
-            <h3>PERKS COMPOSANT LE BUILD : </h3>
+            <h3 class="mt-5">PERKS COMPOSANT LE BUILD : </h3>
             </div>
             
             <div class="d-flex justify-content-center">
@@ -31,44 +32,47 @@
             
         </div>
 
-    
-    {# retour section #}
-    <div>
-        <a href="{{ path('allbuild') }}">Retour aux Builds</a>
+    <div class="container d-flex justify-content-center align-items-center flex-column">
+        {# retour section #}
+        <div class="m-3">
+            <a href="{{ path('allbuild') }}"><button type="button" class="btn btn-secondary"> Retour aux Builds</button></a>
+        </div>
+        {# Remove section #}
+        <div>
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('build_edit', {'id': build.id}) }}"><button type="button" class="btn btn-warning m-3">Modifier</button></a>
+                <a href="{{ path('removebuild', {'id': build.id}) }}"><button type="button" class="btn btn-danger m-3">Supprimer</button></a>
+            {% endif %}
+        </div>
     </div>
-    {# Remove section #}
-    <div>
-        {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('build_edit', {'id': build.id}) }}">Modifier</a>
-            <a href="{{ path('removebuild', {'id': build.id}) }}">Supprimer</a>
+</div>
+
+    <div class="container">
+        <h3 class="comment-title mt-5">
+            <span id='comment-count'>
+                {{ build.comments|length }} avis actuellement
+            
+            </span>
+        </h3>
+        <hr>
+        <div class="comment-area mb-5">
+            {{ form(commentForm, { 'attr': {'class': 'comment-form'} }) }}
+        </div>
+
+        {% if comments is not empty %}
+            <div>
+                {% for comment in comments %}
+            
+                    <h4>{{ comment.getUser().getFirstname() }}</h4>
+                    <p>{{ comment.content }}</p>
+                    <p>{{ comment.createdAt|date("{m/d/Y}") }}</p>
+                    <hr>
+                {% endfor %}
+            </div>
+            {% else %}
+                <p class="fst-italic text-center">Soyez le premier a déclencher un débat pour rien</p>
         {% endif %}
     </div>
 
-    <h3 class="comment-title mt-5">
-        <span id='comment-count'>
-            {{ build.comments|length }} avis actuellement
-           
-        </span>
-    </h3>
-    <hr>
-    <div class="comment-area mb-5">
-        {{ form(commentForm, { 'attr': {'class': 'comment-form'} }) }}
-    </div>
-
-    {% if comments is not empty %}
-        <div>
-            {% for comment in comments %}
-                <h4>{{ comment.getUser().getUsername() }}</h4>
-                <p>{{ comment.content }}</p>
-                <p>{{ comment.createdAt|date("{m/d/Y}") }}</p>
-                <hr>
-                
-            {% endfor %}
-        </div>
-        {% else %}
-            <p class="fst-italic text-center">Soyez le premier a déclencher un débat pour rien</p>
-    {% endif %}
-    
-</div>
 
 {% endblock %}
