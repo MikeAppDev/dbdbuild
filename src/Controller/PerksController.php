@@ -63,6 +63,11 @@ class PerksController extends AbstractController
      */
     public function add(Perk $perk = null, Request $request, SluggerInterface $slugger, EntityManagerInterface $manager): Response
     {
+        if($perk)
+        {
+            $perkActuel = $perk->getImage();
+        }
+
         if(!$perk)
         {
             $perk = new Perk;
@@ -89,17 +94,23 @@ class PerksController extends AbstractController
                     $this->addFlash('message','une erreur est survenu lors de l\'upload de l\'image!');
                     // return $this->redirectToRoute('allbuild');
                 }
+                $perk->setImage($newFilename);
+
                 $perkData = $perkForm->getData();
 
                 // $perkData->setCreatedAt(new DateTime('NOW'));
 
-                $perk->setImage($newFilename);
+            }
+            else
+            {
+                $perk->setImage($perkActuel);
+            }
 
                 $manager->persist($perk);
                 $manager->flush();
                 $this->addFlash('success',"Perks bien enregistré");
                 
-            }
+            
 
             unset($perkForm);
             $perk = new Perk();
@@ -107,7 +118,9 @@ class PerksController extends AbstractController
 
             return $this->redirectToRoute('allperk');
         }
-        if(!$perk){
+        
+        if(!$perk)
+        {
             $manager->remove($perk);
             $manager->flush();
 
@@ -119,6 +132,7 @@ class PerksController extends AbstractController
         return $this->render('perks/addperk.html.twig', [
             'form' => $perkForm->createView(),
             'editMode' => $perk->getId(),
+            'imagePerk' => $perk->getImage()
         ]);
     }
 }

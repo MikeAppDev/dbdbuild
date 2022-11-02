@@ -96,17 +96,23 @@ class BuildController extends AbstractController
      */
     public function AddBuild(Build $build = null, Request $request, SluggerInterface $slugger, EntityManagerInterface $manager) :Response
     {
+
+        if($build)
+        {
+            $buildActuel = $build->getImage();
+        }
+
         if(!$build)
         {
             $build = new Build;
         }
-
 
         $buildForm = $this->createForm(BuildType::class, $build);
         $buildForm->handleRequest($request);
 
         if($buildForm->isSubmitted() && $buildForm->isValid())
         {
+
             $imageFile = $buildForm->get('image')->getData();
 
             if ($imageFile) {
@@ -123,17 +129,23 @@ class BuildController extends AbstractController
                     $this->addFlash('message','une erreur est survenu lors de l\'upload de l\'image!');
                     // return $this->redirectToRoute('allbuild');
                 }
+
+                $build->setImage($newFilename);
+                
                 $buildData = $buildForm->getData();
 
                 $buildData->setCreatedAt(new DateTime('NOW'));
 
-                $build->setImage($newFilename);
-
-                $manager->persist($build);
-                $manager->flush();
-                $this->addFlash('success',"Build bien enregistré");
-                
             }
+            else
+            {
+                $build->setImage($buildActuel);
+            }
+
+            $manager->persist($build);
+            $manager->flush();
+            $this->addFlash('success',"Build bien enregistré");
+
 
             unset($buildForm);
             $build = new Build();
@@ -145,6 +157,7 @@ class BuildController extends AbstractController
         return $this->render('build/addBuild.html.twig', [
             'form' => $buildForm->createView(),
             'editMode' => $build->getId(),
+            'imageBuild' => $build->getImage()
         ]);
     }
 }

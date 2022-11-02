@@ -11,9 +11,9 @@
         <div class="card-body">
             <h5 class="card-title"> {{ app.user.name }} {{ app.user.firstname }} </h5>
             {% if app.user.roles == 'ROLE_ADMIN' %}
-                <h6 class="card-subtitle mb-2 text-muted">Vous êtes Admin du blog</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Vous êtes Administrateur</h6>
             {% else %}
-                <h6 class="card-subtitle mb-2 text-muted">Vous êtes Utilisateur du blog</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Vous êtes Utilisateur/Créateur</h6>
             {% endif %}
 
             <p class="card-text d-flex justify-content-between">
@@ -32,7 +32,11 @@
                 <strong>Ville : </strong>
                 <span>{{ app.user.city }}</span>
             </p>
-            <a href="{{ path('app_profile_edit',{'id': app.user.id})}}" class="card-link d-flex justify-content-center text-decoration-none">Modifier</a>
+            <div class="d-flex justify-content-center">
+                <a href="{{ path('app_profile_edit',{'id': app.user.id})}}" class="card-link d-flex justify-content-center text-decoration-none">
+                    <button class="btn btn-lg btn-danger btn-color-spe m-3">Modifier</button>
+                </a>
+            </div>
         </div>
     </div>
 

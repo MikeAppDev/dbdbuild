@@ -1,27 +1,30 @@
 <nav class="py-2 bg-dark border-bottom">
     <div class="container d-flex flex-wrap">
-        <div class="dropdown">
-        {% if app.user %}
-            <a class="nav nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                DBD Build
-            </a>
-            
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonAdmin">
-                {% if is_granted('ROLE_ADMIN') %}
-                <li><a class="dropdown-item" href="{{ path('admin') }}">Dashboard</a></li>
+        <img src="{{ asset('image/fix/logo.png') }}" alt="logo" class="" style="width: 60px">
+            <div class="dropdown">
+            {% if app.user %}
+                <div>
+                    <a class="nav nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        DBD Build
+                    </a>
+                    
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonAdmin">
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <li><a class="dropdown-item" href="{{ path('admin') }}">Dashboard</a></li>
+                        {% endif %}
+                        
+                        <li><a class="dropdown-item" href="{{ path('app_profile') }}">Profile</a></li>
+                        
+                    </ul>
+                    </div>
                 {% endif %}
-                
-                <li><a class="dropdown-item" href="{{ path('app_profile') }}">Profile</a></li>
-                
-            </ul>
-            {% endif %}
-        </div>
+            </div>
         <div class="dropdown">
             <a class="nav nav-link dropdown-toggle text-white" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 View
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonAdminAdd">
-                <li><a class="dropdown-item" href="{{ path('allbuild')}}">Builds</a></li>
+                <li><a class="dropdown-item " href="{{ path('allbuild')}}">Builds</a></li>
                 <li><a class="dropdown-item" href="{{ path('allkiller')}}">Killers</a></li>
                 <li><a class="dropdown-item" href="{{ path('allperk')}}">Perks</a></li>
             </ul>

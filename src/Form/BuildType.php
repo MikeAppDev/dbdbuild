@@ -42,7 +42,13 @@ class BuildType extends AbstractType
             // ->add('featuredText')
             // ->add('createdAt')
             // ->add('updatedAt')
-            ->add('image', FileType::class, array('data_class' => null))
+            ->add('image', FileType::class, [
+                'mapped' => true, // siginfie que le champ est associé à une propriété et qu'il sera inséré en BDD
+                'required' => false,
+                'data_class' => null,
+                
+            ])
+
             ->add('categories', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
@@ -78,7 +84,10 @@ class BuildType extends AbstractType
                         ->orderBy('u.name', 'ASC');
                 },
             ])
-            ->add('Send', SubmitType::class)
+            ->add('Send', SubmitType::class, [
+                'label' => 'Envoyer',
+                'attr' => ['class' => 'btn-color-spe white']
+             ])
         ;
     }
 

@@ -15,9 +15,11 @@
     {# <img src="{{ asset('build.image') }}" alt="image"> #}
         {# {{dump(build.getPerk1)}} #}
     {# afficher images #}
+    
         <div class="col-md-5">
             <img src="{{ asset('image/build/' ~ build.image) }}" alt="{{ build.title }}" class="col-12 ">
         </div>
+    
         <div class="col-md-12 d-flex flex-column justify-content-center">
             <div class="d-flex justify-content-center mt-4 mb-4">
             <h3 class="mt-5">PERKS COMPOSANT LE BUILD : </h3>
@@ -35,7 +37,7 @@
     <div class="container d-flex justify-content-center align-items-center flex-column">
         {# retour section #}
         <div class="m-3">
-            <a href="{{ path('allbuild') }}"><button type="button" class="btn btn-secondary"> Retour aux Builds</button></a>
+            <a href="{{ path('allbuild') }}"><button type="button" class="btn btn-danger btn-color-spe "> Retour aux Builds</button></a>
         </div>
         {# Remove section #}
         <div>
@@ -46,7 +48,7 @@
         </div>
     </div>
 </div>
-
+    {# Commment #}
     <div class="container">
         <h3 class="comment-title mt-5">
             <span id='comment-count'>
@@ -56,7 +58,7 @@
         </h3>
         <hr>
         <div class="comment-area mb-5">
-            {{ form(commentForm, { 'attr': {'class': 'comment-form'} }) }}
+            {{ form(commentForm, { 'attr': {'class': 'comment-form'} }) }} 
         </div>
 
         {% if comments is not empty %}

@@ -27,7 +27,10 @@ class PerkType extends AbstractType
                     ]
                 ]
             )
-            ->add('Send', SubmitType::class)
+            ->add('Send', SubmitType::class, [
+                'label' => 'Ajouter',
+                'attr' => ['class' => 'btn-color-spe white']
+             ])
         ;
     }
 

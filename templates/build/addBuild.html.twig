@@ -29,6 +29,14 @@
                     <div class="form-group ">
                         {{ form_row(form.image) }}
                     </div>
+                    
+                    {% if imageBuild %}
+                        <p class="mt-3">
+                            <em class="pb-2">Vous pouvez uploder une image si vous souhaitez la modifier</em><br><br>
+                            <img src="{{ asset('uploads/images/' ~ imageBuild) }}" alt="" class="col-md-3 rounded shadow-lg">
+                        </p>
+                    {% endif %}
+
                     <div class="form-group col-12 d-flex justify-content-around flex-row align-items-center">
                         {{ form_row(form.perk1) }}
                         {{ form_row(form.killers) }}

@@ -20,8 +20,9 @@ class CommentType extends AbstractType
          ->add('content', TextareaType::class, [
             'label' => 'Avis'
          ])
-         ->add('send', SubmitType::class, [
-            'label' => 'Send'
+         ->add('Send', SubmitType::class, [
+            'label' => 'Send',
+            'attr' => ['class' => 'btn-color-spe white']
          ])
          ;
          /*

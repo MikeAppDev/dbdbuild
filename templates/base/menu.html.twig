@@ -1,26 +1,26 @@
 <div class="container">
     <header class="d-flex flex-wrap justify-content-between align-items-center py-3 mb-4 border-bottom">
         <a class="d-flex align-items-center justify-content-center mb-md-0 me-md-auto text-dark text-decoration-none" href="{{ path('app_home') }}">
-            <span class="fs-4 d-flex align-items-center rounded border border-secondary p-2">Home Build</span>
+            <span class="fs-4 d-flex align-items-center rounded border border-secondary p-4 title-white nav-item-color">Home Build</span>
         </a>
         
 
             <ul class="nav nav-pills">
 
             {% if app.user %}
-                Welcome : 
-                <span style="color: green">
-                {{ app.user.firstname }} - {{ app.user.name }}
-                </span>
+                <p>Welcome : | </p>
+                <span style="color: red">
+                <p> &nbsp; {{ app.user.firstname }} - {{ app.user.name }} &nbsp;</p>
+                </span> | 
                 {# {{ dump(app.user) }} #}
-                <a class='' href="{{ path('app_logout') }}">Logout</a>
+                &nbsp;<a class='' href="{{ path('app_logout') }}">Logout</a>
             {# {{dump(app.user)}} #}
             {% else %}
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="{{ path('app_login') }}">Sign in</a>
+                <li class="nav-item nav-item-color m-1 p-2">
+                    <a class="nav-link text-dark" href="{{ path('app_login') }}"><span class="title-white">Sign in</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link  text-dark" href="{{ path('app_register' )}}">Create Account</a>
+                <li class="nav-item nav-item-color m-1 p-2">
+                    <a class="nav-link  text-dark" href="{{ path('app_register' )}}"><span class="title-white">Create Account</span></a>
                 </li>
             {% endif %}
                 

@@ -1,0 +1,48 @@
+body{
+    background-color: $backgroundDark;
+    color: $text;
+}
+.title-white{
+    color: $text;
+}
+
+a{
+    color: $text;
+}
+a:hover{
+    color: $link;
+    transition: 0.5s;
+}
+.img-detour:hover{
+    border: $link 1px solid;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+//Menu
+.dropdown-menu{
+    background-color: $backgroundDark;
+}
+.dropdown-item {
+    color: $text;
+}
+
+//spe Button
+.btn-color-spe, .nav-item-color{
+    background-color: $link;
+}
+.btn-color-spe:hover{
+    background-color: $hoverRed;
+}
+.nav-item-color:hover{
+    background-color: $hoverRed;
+    transition: 1s;
+}
+.white{
+    color: $text;
+}
+
+//Profile
+.card-body{
+    background-color: $backgroundDark;
+}

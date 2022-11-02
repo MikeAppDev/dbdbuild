@@ -1,1 +1,8 @@
+//Bootstrap
 @import "~bootstrap/scss/bootstrap";
+
+//Variables
+@import "./component/variables.scss";
+
+//Global
+@import "./component/home.scss";
