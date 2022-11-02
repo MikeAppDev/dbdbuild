@@ -3,13 +3,15 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    {% if editMode %}
-        <h1>Modif</h1>
-    {% else %}
-        <h1>Register</h1>
-    {% endif %}
+    <div class="container d-flex justify-content-center mb-4">
+        {% if editMode %}
+            <h1>Modif</h1>
+        {% else %}
+            <h1>Register</h1>
+        {% endif %}
+    </div>
+    <div class="container col-md-10 col-lg-6">
     
-
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.firstName) }}
         {{ form_row(registrationForm.name) }}
@@ -17,8 +19,13 @@
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        {# {{ form_row(registrationForm.agreeTerms) }} #}
 
-        <button type="submit" class="btn">Register</button>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-danger btn-color-spe">S'enregistrer</button>
+        </div>
+        
     {{ form_end(registrationForm) }}
+
+    </div>
 {% endblock %}
