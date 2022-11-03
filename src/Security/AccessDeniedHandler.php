@@ -13,6 +13,6 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
     {
         // ...
 
-        return new Response($content, 403);
+        // return new Response($content, 403);
     }
 }

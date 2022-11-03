@@ -94,11 +94,10 @@ class PerksController extends AbstractController
                     $this->addFlash('message','une erreur est survenu lors de l\'upload de l\'image!');
                     // return $this->redirectToRoute('allbuild');
                 }
+
                 $perk->setImage($newFilename);
 
                 $perkData = $perkForm->getData();
-
-                // $perkData->setCreatedAt(new DateTime('NOW'));
 
             }
             else
@@ -106,11 +105,10 @@ class PerksController extends AbstractController
                 $perk->setImage($perkActuel);
             }
 
-                $manager->persist($perk);
-                $manager->flush();
-                $this->addFlash('success',"Perks bien enregistré");
+            $manager->persist($perk);
+            $manager->flush();
+            $this->addFlash('success',"Perks bien enregistré");
                 
-            
 
             unset($perkForm);
             $perk = new Perk();
@@ -118,16 +116,7 @@ class PerksController extends AbstractController
 
             return $this->redirectToRoute('allperk');
         }
-        
-        if(!$perk)
-        {
-            $manager->remove($perk);
-            $manager->flush();
 
-            $this->addFlash('success', "La Perk a bien été supprimé !");
-
-            return $this->redirectToRoute('app_home');
-        }
 
         return $this->render('perks/addperk.html.twig', [
             'form' => $perkForm->createView(),

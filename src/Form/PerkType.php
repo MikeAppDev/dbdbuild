@@ -18,7 +18,12 @@ class PerkType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('image', FileType::class, array('data_class' => null))
+            ->add('image', FileType::class, [
+                'mapped' => true, // siginfie que le champ est associé à une propriété et qu'il sera inséré en BDD
+                'required' => false,
+                'data_class' => null,
+                
+            ])
             ->add('slug')
             ->add('category', ChoiceType::class, [
                     'choices' => [

@@ -31,7 +31,7 @@
                         <em class="pb-2">Vous pouvez uploder une image si vous souhaitez la modifier</em><br><br>
                         <img src="{{ asset('uploads/images/' ~ imagePerk) }}" alt="" class="col-md-3 rounded shadow-lg">
                     </p>
-                    {# {{dump(imagePerk)}} #}
+                    {{dump(imagePerk)}}
                 {% endif %}
         <div class="form-group ">
             {{ form_row(form.slug) }}
