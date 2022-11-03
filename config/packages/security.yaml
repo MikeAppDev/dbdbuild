@@ -46,7 +46,7 @@ security:
         - { path: ^/addkiller, roles: ROLE_ADMIN }
         - { path: ^/addperk, roles: ROLE_ADMIN }
 
-    # Si un utilisateur non ROLE_ADMIN tente d'accéder au backoffice, on le redirige vers le blog
+    # Si un utilisateur non ROLE_ADMIN tente d'accéder au backoffice, on le redirige vers la page d'accueil
     access_denied_url: Home
 
 when@test:
