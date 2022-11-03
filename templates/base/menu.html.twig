@@ -10,7 +10,8 @@
             {% if app.user %}
                 <p>Welcome : | </p>
                 <span style="color: red">
-                <p> &nbsp; {{ app.user.firstname }} - {{ app.user.name }} &nbsp;</p>
+                
+                &nbsp;<a class="text-decoration-none" href="{{ path('app_profile') }}"> {{ app.user.firstname }} - {{ app.user.name }} &nbsp;</a>
                 </span> | 
                 {# {{ dump(app.user) }} #}
                 &nbsp;<a class='' href="{{ path('app_logout') }}">Logout</a>
